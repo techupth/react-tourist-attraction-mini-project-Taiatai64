@@ -1,0 +1,9 @@
+.miniPhoto img {
+  height: 150px;
+  width: 150px;
+}
+
+.mainPhoto img {
+  height: 500px;
+  width: 500px;
+}
