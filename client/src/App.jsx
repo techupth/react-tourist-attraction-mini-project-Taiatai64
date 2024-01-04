@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  let [searchText, setSearchText] = useState("กรุณาพิมพ์เพื่อค้นหา");
+  let [searchText, setSearchText] = useState("");
 
   let [result, setResult] = useState([]);
 
@@ -23,6 +23,7 @@ function App() {
       {/* Start coding here */}
 
       <h1 className="Head">เที่ยวไหนดี</h1>
+      <p>กรุณาพิมพ์เพื่อแสดงผล</p>
       <input onChange={getTrip} value={searchText}></input>
       {result.map((trip) => {
         return (
