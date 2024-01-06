@@ -1,22 +1,25 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   let [searchText, setSearchText] = useState("");
 
   let [result, setResult] = useState([]);
 
-  const getTrip = (e) => {
-    setSearchText(e.target.value);
-    fetch("http://localhost:4001/trips?keywords=" + e.target.value)
+  const getTrip = () => {
+    axios
+      .get("http://localhost:4001/trips?keywords=" + searchText)
       .then((respon) => {
-        return respon.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setResult(data.data);
+        console.log(respon);
+        setResult(respon.data.data);
       });
   };
+
+  useEffect(() => {
+    getTrip();
+  }, [searchText]);
+
   console.log(result);
   return (
     <div className="App">
@@ -24,7 +27,11 @@ function App() {
 
       <h1 className="Head">เที่ยวไหนดี</h1>
       <p>กรุณาพิมพ์เพื่อแสดงผล</p>
-      <input onChange={getTrip} value={searchText}></input>
+      <input
+        type="text"
+        onChange={(e) => setSearchText(e.target.value)}
+        value={searchText}
+      />
       {result.map((trip) => {
         return (
           <div>
@@ -48,5 +55,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
